@@ -36,6 +36,7 @@ def main(model_name, options):
 
     # Initialize maze environments.
     env = gym.make('Pong-v0')
+    # env = gym.make('CartPole-v0')
     #env = gym.make('Taxi-v2')
 
     envs = [env]
