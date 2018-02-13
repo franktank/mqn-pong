@@ -15,21 +15,27 @@ def DQNmodel(nb_actions, window_length, h_size, maze_dim):
     '''
 
     input_layer = Input((window_length, 4))
-    provider = Conv1D(filters=12, kernel_size=1, strides=1, padding="valid")(input_layer)
-    provider = Conv1D(filters=24, kernel_size=1, strides=1, padding="valid")(provider)
+    e = Dense(h_size, activation='relu')(input_layer)
+    e = Dense(h_size, activation='relu')(e)
+    e = Dense(h_size, activation='relu')(e)
+    e = Flatten()(e)
+    e = Dense(nb_actions, activation='linear')(e)
+    # provider = Conv1D(filters=12, kernel_size=1, strides=1, padding="valid")(input_layer)
+    # provider = Conv1D(filters=24, kernel_size=1, strides=1, padding="valid")(provider)
     #e = Flatten()(input_layer)
     #e = Dense(512)(e)
     #provider = Flatten()(provider)
 
-    provider = Reshape((window_length,-1))(provider)
 
-    e = Dense(h_size, activation=PReLU())(provider)
-    e = Dropout(0.5)(e)
-    e = Dense(h_size, activation=PReLU())(e)
-    e = Dropout(0.5)(e)
-    e = Flatten()(e)
-    e = Dense(nb_actions, activation='linear')(e)
-    e = Dropout(0.5)(e)
+    # provider = Reshape((window_length,-1))(provider)
+
+    # e = Dense(h_size, activation=PReLU())(provider)
+    # e = Dropout(0.5)(e)
+    # e = Dense(h_size, activation=PReLU())(e)
+    # e = Dropout(0.5)(e)
+    # e = Flatten()(e)
+    # e = Dense(nb_actions, activation='linear')(e)
+    # e = Dropout(0.5)(e)
 
     model = Model(inputs=input_layer, outputs=e)
     print (model.summary())

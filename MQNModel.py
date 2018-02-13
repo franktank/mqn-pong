@@ -21,12 +21,16 @@ def MQNmodel(e_t_size, context_size, memory_size, window_length, nb_actions, maz
 
     #This is for the maze environment with partial observability
     input_layer = Input((window_length, 4))
-    provider = Conv1D(filters=12, kernel_size=1, strides=1, padding="valid")(input_layer)
-    provider = Conv1D(filters=24, kernel_size=1, strides=1, padding="valid")(provider)
+    # provider = Conv1D(filters=12, kernel_size=1, strides=1, padding="valid")(input_layer)
+    # provider = Conv1D(filters=24, kernel_size=1, strides=1, padding="valid")(provider)
 
-    provider = Reshape((window_length,-1))(provider)
-
-    e = Dense(e_t_size)(provider)
+    # provider = Reshape((window_length,-1))(provider)
+    e = Dense(200, activation='relu')(input_layer)
+    e = Dense(200, activation='relu')(e)
+    e = Dense(200, activation='relu')(e)
+    # e = Flatten()(e)
+    e = Dense(nb_actions, activation='linear')(e)
+    # e = Dense(e_t_size)(provider)
     # e = Dense(e_t_size)(input_layer)
     e = Dropout(rate=0.5)(e)
 
