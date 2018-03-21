@@ -14,7 +14,7 @@ def DQNmodel(nb_actions, window_length, h_size, maze_dim):
     in the environment.
     '''
 
-    input_layer = Input((window_length, 4))
+    input_layer = Input((window_length, 6400))
     provider = Conv1D(filters=12, kernel_size=1, strides=1, padding="valid")(input_layer)
     provider = Conv1D(filters=24, kernel_size=1, strides=1, padding="valid")(provider)
     #e = Flatten()(input_layer)
