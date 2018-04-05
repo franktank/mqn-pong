@@ -48,7 +48,7 @@ def main(model_name, options):
     e_t_size = 64 #For MQN / RMQN
     context_size = 64
     nb_steps_warmup = int(1e5)
-    nb_steps = int(4e5)
+    nb_steps = int(4e15)
     buffer_size = 8e4
     learning_rate = 0.003
     target_model_update = 0.999
